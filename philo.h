@@ -11,9 +11,9 @@ typedef struct s_arg
     int  time_to_die;
     int time_to_eat;
     int time_to_sleep;
-    int number_of_times_each_philosopher_must_eat;
+    int number_eat;
 
-}t_arg;
+}t_arg; 
 
 typedef struct s_philo
 {
@@ -22,8 +22,9 @@ typedef struct s_philo
     int time_to_eat;
     int time_to_sleep;
 
-
-
 }t_philo;
+
+int	ft_atoi(const char *str);
+int ft_isnumb(char *s);
 
 #endif

@@ -12,19 +12,46 @@ int check_input_data(int argc,char **argv)
     }
     while(argv[i])
     {
-        if(!(ft_digit(argv[i]) && ft_atoi(argv[i]))
+        if(!(ft_isnumb(argv[i]) && ft_atoi(argv[i]))
         {
         printf("Invalid input arguments(should only be numbers)");
-        return (1);
+            return (1);
         }  
         i++;
     }
         return (0);   
 }
 
+void init_input_args(t_arg *input_args, int argc, char **argv)
+{
+    input_args->number_of_philosophers = ft_atoi(argv[1]);
+    input_args->time_to_die = ft_atoi(argv[2]);
+    input_args->time_to_eat = ft_atoi(argv[3]);
+    input_args->time_to_sleep = ft_atoi(argv[4]);
+    if(argc == 6)
+    {
+        input_args->number_eat = ft_atoi(argv[5]);
+    }
+     
+}
+
+void init_mutex (t_arg *input_args)
+{
+    pthread_mutex_t mutex;
+
+    mutex = malloc(sizeof(pthread_mutex_t) * input_args->number_of_philosophers);
+    if(!mutex)
+        exit(0);
+    pthread_mutex_init(&mutex, NULL);
+
+    
+}
+
 int main(int argc, char **argv)
 {
+    t_arg input_args;
+
     if(check_input_data(argc,argv))
-        return(1);
-    init_philosophers();
+        return (1); 
+    init_input_args(&input_args, argc, argv);
 }
