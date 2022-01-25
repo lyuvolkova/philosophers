@@ -7,7 +7,7 @@
 
 typedef struct s_arg
 {
-    int number_of_philosophers;
+    int number_of_philo;
     int  time_to_die;
     int time_to_eat;
     int time_to_sleep;

@@ -24,7 +24,7 @@ int check_input_data(int argc,char **argv)
 
 void init_input_args(t_arg *input_args, int argc, char **argv)
 {
-    input_args->number_of_philosophers = ft_atoi(argv[1]);
+    input_args->number_of_philo = ft_atoi(argv[1]);
     input_args->time_to_die = ft_atoi(argv[2]);
     input_args->time_to_eat = ft_atoi(argv[3]);
     input_args->time_to_sleep = ft_atoi(argv[4]);
@@ -37,12 +37,19 @@ void init_input_args(t_arg *input_args, int argc, char **argv)
 
 void init_mutex (t_arg *input_args)
 {
-    pthread_mutex_t mutex;
+    pthread_mutex_t *mutex;
+    int n;
 
-    mutex = malloc(sizeof(pthread_mutex_t) * input_args->number_of_philosophers);
+    mutex = malloc(sizeof(pthread_mutex_t) * input_args->number_of_philo);
     if(!mutex)
         exit(0);
-    pthread_mutex_init(&mutex, NULL);
+    n = input_args->number_of_philo;
+    while( n >= 0)
+    {
+        pthread_mutex_init(&mutex[n], NULL);
+        n--;
+    }    
+        
 
     
 }
