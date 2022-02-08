@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eat_think.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lubov <lubov@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qgrodd <qgrodd@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 21:04:38 by lubov             #+#    #+#             */
-/*   Updated: 2022/02/07 23:17:38 by lubov            ###   ########.fr       */
+/*   Updated: 2022/02/08 19:37:28 by qgrodd           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ void	eating(t_philo *philo)
 	long	time;
 
 	pthread_mutex_lock(&philo->args->lock_pr);
-	printf("%ld %u is eating\n", get_time() - philo->args->start, \
-		philo->philo_id);
+	printf("%ld\t%u\tis eating\n", \
+		get_time() - philo->args->start, philo->philo_id);
 	philo->f_eat++;
 	philo->last_eat = get_time();
 	pthread_mutex_unlock(&philo->args->lock_pr);
 	time = get_time();
 	while (get_time() - time < philo->args->time_to_eat)
-		usleep(500);
+		usleep(200);
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
 }
@@ -34,15 +34,15 @@ void	sleep_think(t_philo *philo)
 	long long	time;
 
 	pthread_mutex_lock(&philo->args->lock_pr);
-	printf("%ld %u is sleeping\n", get_time() - philo->args->start, \
-		philo->philo_id);
+	printf("%ld\t%u\tis sleeping\n", \
+		get_time() - philo->args->start, philo->philo_id);
 	pthread_mutex_unlock(&philo->args->lock_pr);
 	time = get_time();
 	while (get_time() - time < philo->args->time_to_sleep)
-		usleep(500);
+		usleep(200);
 	pthread_mutex_lock(&philo->args->lock_pr);
-	printf("%ld %u is thinking\n", get_time() - philo->args->start, \
-		philo->philo_id);
+	printf("%ld\t%u\tis thinking\n", \
+		get_time() - philo->args->start, philo->philo_id);
 	pthread_mutex_unlock(&philo->args->lock_pr);
 	usleep(100);
 }

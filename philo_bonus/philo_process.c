@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lubov <lubov@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qgrodd <qgrodd@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 00:23:00 by lubov             #+#    #+#             */
-/*   Updated: 2022/02/08 01:38:31 by lubov            ###   ########.fr       */
+/*   Updated: 2022/02/08 19:38:35 by qgrodd           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void	get_forks(t_philo *philo, t_arg *args)
 {
 	sem_wait(args->forks);
 	sem_wait(args->lock_pr);
-	printf("%ld %u has taken a fork\n", \
+	printf("%ld\t%u\thas taken a fork\n", \
 		get_time() - philo->args->start, philo->philo_id);
 	if (!check_print(philo))
 		sem_post(args->lock_pr);
 	sem_wait(args->forks);
 	sem_wait(args->lock_pr);
-	printf("%ld %u has taken a fork\n", \
+	printf("%ld\t%u\thas taken a fork\n", \
 		get_time() - philo->args->start, philo->philo_id);
 	if (!check_print(philo))
 		sem_post(args->lock_pr);

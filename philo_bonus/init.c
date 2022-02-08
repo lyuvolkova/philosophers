@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lubov <lubov@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qgrodd <qgrodd@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 23:28:53 by lubov             #+#    #+#             */
-/*   Updated: 2022/02/08 01:39:31 by lubov            ###   ########.fr       */
+/*   Updated: 2022/02/08 19:41:00 by qgrodd           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_end(t_arg *args, t_philo *philo)
 {
 	sem_wait(args->lock_pr);
 	args->die = 1;
-	printf("%ld %u is died\n", \
+	printf("%ld\t%u\tis DIED\n", \
 	get_time() - args->start, philo->philo_id);
 	sem_post(args->end);
 	exit(1);

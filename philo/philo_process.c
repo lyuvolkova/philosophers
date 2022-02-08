@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lubov <lubov@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qgrodd <qgrodd@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 20:41:59 by lubov             #+#    #+#             */
-/*   Updated: 2022/02/07 23:22:03 by lubov            ###   ########.fr       */
+/*   Updated: 2022/02/08 19:41:34 by qgrodd           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void	get_forks_2(t_philo *philo)
 {
 	pthread_mutex_lock(philo->r_fork);
 	pthread_mutex_lock(&philo->args->lock_pr);
-	printf("%ld %u has taken a fork\n", \
+	printf("%ld\t%u\thas taken a fork\n", \
 		get_time() - philo->args->start, philo->philo_id);
 	pthread_mutex_unlock(&philo->args->lock_pr);
 	pthread_mutex_lock(philo->l_fork);
 	pthread_mutex_lock(&philo->args->lock_pr);
-	printf("%ld %u has taken a fork\n", \
+	printf("%ld\t%u\thas taken a fork\n", \
 		get_time() - philo->args->start, philo->philo_id);
 	pthread_mutex_unlock(&philo->args->lock_pr);
 }
@@ -32,12 +32,12 @@ void	get_forks(t_philo *philo)
 	{
 		pthread_mutex_lock(philo->l_fork);
 		pthread_mutex_lock(&philo->args->lock_pr);
-		printf("%ld %u has taken a fork\n", \
+		printf("%ld\t%u\thas taken a fork\n", \
 			get_time() - philo->args->start, philo->philo_id);
 		pthread_mutex_unlock(&philo->args->lock_pr);
 		pthread_mutex_lock(philo->r_fork);
 		pthread_mutex_lock(&philo->args->lock_pr);
-		printf("%ld %u has taken a fork\n", \
+		printf("%ld\t%u\thas taken a fork\n", \
 			get_time() - philo->args->start, philo->philo_id);
 		pthread_mutex_unlock(&philo->args->lock_pr);
 	}

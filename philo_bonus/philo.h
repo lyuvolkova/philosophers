@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lubov <lubov@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qgrodd <qgrodd@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 23:30:54 by lubov             #+#    #+#             */
-/*   Updated: 2022/02/08 01:32:26 by lubov            ###   ########.fr       */
+/*   Updated: 2022/02/08 19:14:12 by qgrodd           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_philo
 	long			last_eat;
 	char			f_eat;
 	pid_t			pid;
-	pthread_t		*check;
+	pthread_t		check;
 	struct s_arg	*args;
 }					t_philo;
 
@@ -54,12 +54,10 @@ int		check_print(t_philo *philo);
 long	get_time(void);
 void	*check(void *data);
 void	init_philo(t_arg *args);
-void	ft_malloc(t_arg *args);
 void	free_all(t_arg *args, t_philo *philo);
 void	eating(t_philo *philo, t_arg *args);
 void	sleep_think(t_philo *philo, t_arg *args);
 void	philo_process(t_philo *philo, t_arg *args);
 void	free_all(t_arg *args, t_philo *philo);
-
 
 #endif

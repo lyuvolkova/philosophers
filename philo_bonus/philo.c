@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lubov <lubov@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qgrodd <qgrodd@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 23:27:18 by lubov             #+#    #+#             */
-/*   Updated: 2022/02/08 01:33:41 by lubov            ###   ########.fr       */
+/*   Updated: 2022/02/08 19:40:09 by qgrodd           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	check_input_data(int argc, char **argv)
 	{
 		if (!(ft_isnumb(argv[i]) && ft_atoi(argv[i])))
 		{
-			printf("Invalid input arguments(should only be numbers)");
+			printf("Invalid input arguments(should only be pos numbers)");
 			return (1);
 		}
 		i++;
@@ -57,7 +57,7 @@ int	init_input_args(t_arg *args, int argc, char **argv)
 
 void	ft_philo(t_arg *args)
 {
-	int	i;
+	int			i;
 
 	i = 0;
 	args->start = get_time();
@@ -68,8 +68,8 @@ void	ft_philo(t_arg *args)
 			exit(1);
 		if (args->data_philos[i].pid == 0)
 		{
-			if (pthread_create(&args->data_philos[i].check, \
-				NULL, &check, &args->data_philos[i]))
+			if (pthread_create(&args->data_philos[i].check, NULL, \
+				&check, &args->data_philos[i]))
 				exit(1);
 			philo_process(&(args->data_philos[i]), args);
 			break ;
@@ -77,6 +77,31 @@ void	ft_philo(t_arg *args)
 		i++;
 	}
 	free_all(args, args->data_philos);
+}
+
+void	ft_malloc(t_arg *args)
+{
+	args->data_philos = malloc((sizeof(t_philo)) * args->number_of_philo);
+	if (!args->data_philos)
+	{
+		printf("ERROR malloc");
+		exit(1);
+	}
+	sem_unlink("/forks");
+	sem_unlink("/logs");
+	sem_unlink("/end");
+	sem_unlink("/ttd");
+	args->forks = sem_open("/forks", O_CREAT | O_EXCL, \
+		777, args->number_of_philo);
+	args->lock_pr = sem_open("/logs", O_CREAT | O_EXCL, 777, 1);
+	args->end = sem_open("/end", O_CREAT | O_EXCL, 777, 0);
+	args->block_eat = sem_open("/ttd", O_CREAT | O_EXCL, 777, 1);
+	if (args->forks <= 0 || args->lock_pr <= 0 || \
+		args->end <= 0 || args->block_eat <= 0)
+	{
+		printf("ERROR semaphore");
+		exit(1);
+	}
 }
 
 int	main(int argc, char **argv)

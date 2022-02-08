@@ -26,7 +26,7 @@ int	check_input_data(int argc, char **argv)
 	{
 		if (!(ft_isnumb(argv[i]) && ft_atoi(argv[i])))
 		{
-			printf("Invalid input arguments(should only be numbers)");
+			printf("Invalid input arguments(should only be pos numbers)");
 			return (1);
 		}
 		i++;
@@ -89,7 +89,7 @@ void	check_philo(t_arg *args)
 			{
 				pthread_mutex_lock(&args->lock_pr);
 				philo[i].die = 1;
-				printf("%ld %d is DIED\n", get_time()
+				printf("%ld\t%d   is DIED\n", get_time()
 					- args->start, philo[i].philo_id);
 				free_all(args, 1);
 				exit(0);
